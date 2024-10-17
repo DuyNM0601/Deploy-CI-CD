@@ -15,7 +15,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # Bước 2: Tạo file .env với các thông tin cấu hình
+    # Bước 2: Kiểm tra người dùng hiện tại
+    - name: Check current user
+      run: whoami
+
+    # Bước 3: Tạo file .env với các thông tin cấu hình
     - name: Create .env file
       run: |
         echo "POSTGRES_HOST=103.162.15.145" > .env
@@ -32,6 +36,6 @@ jobs:
         echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
         echo "REFRESH_TOKEN_KEY=${{ secrets.REFRESH_TOKEN_KEY }}" >> .env
 
-    # Bước 3: Thiết lập Docker Compose và khởi động container backend
+    # Bước 4: Thiết lập Docker Compose và khởi động container backend
     - name: Build and Deploy Backend with Docker Compose
       run: docker compose up --build -d  # Build và khởi động lại container
