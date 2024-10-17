@@ -34,6 +34,4 @@ jobs:
 
     # Bước 3: Thiết lập Docker Compose và khởi động container backend
     - name: Build and Deploy Backend with Docker Compose
-      run: |
-        docker compose down    # Dừng các container cũ
-        docker compose up --build -d  # Build và khởi động lại container
+      run: docker compose up --build -d  # Build và khởi động lại container
