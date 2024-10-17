@@ -120,4 +120,27 @@ export class AccountController {
             );
         }
     }
+
+    @Get('TEST')
+    async findS(
+        @Query('page') page?: number,
+        @Query('pageSize') pageSize?: number,
+    ) {
+        try {
+            const account = await this.accountService.find(page, pageSize);
+            return ResponseHelper.success(
+                HttpStatus.OK,
+                account,
+                SuccessMessages.get('Account'),
+            );
+        } catch (error) {
+            throw new HttpException(
+                {
+                    statusCode: error.status || HttpStatus.BAD_REQUEST,
+                    message: error.message || 'Invalid or expired token',
+                },
+                error.status || HttpStatus.BAD_REQUEST,
+            );
+        }
+    }
 }
